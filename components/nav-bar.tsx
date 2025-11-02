@@ -3,10 +3,10 @@ import { MobileSearchIcon } from "@/components/mobile-search-icon";
 import { ThemeToggle } from "@/components/theme-toggler";
 import DarkPng from "../public/branding/better-auth-logo-dark.png";
 import WhitePng from "../public/branding/better-auth-logo-light.png";
-import HalloweenLogo from "./halloween/logo";
 import LogoContextMenu from "./logo-context-menu";
 import { NavLink } from "./nav-link";
 import { NavbarMobile, NavbarMobileBtn } from "./nav-mobile";
+import { Logo } from "./logo";
 
 export const navMenu = [
 	{
@@ -91,12 +91,12 @@ export const Navbar = () => {
 						<LogoContextMenu
 							logo={
 								// TODO: Revert to original logo after Halloween
-								//
-								// <div className="flex items-center gap-2">
-								// 	<Logo />
-								// 	<p className="select-none">BETTER-AUTH.</p>
-								// </div>
-								<HalloweenLogo />
+								
+								<div className="flex items-center gap-2">
+									<Logo />
+									<p className="select-none">AWS Roadmap</p>
+								</div>
+								// <HalloweenLogo />
 							}
 							logoAssets={logoAssets}
 						/>
