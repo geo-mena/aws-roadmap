@@ -154,7 +154,9 @@ export async function generateMetadata({
 	const page = changelogs.getPage(slug);
 	if (page == null) notFound();
 	const baseUrl = process.env.NEXT_PUBLIC_URL || process.env.VERCEL_URL;
-	const url = new URL(`${baseUrl}/release-og/${slug.join("")}.png`);
+	const url = new URL(
+		`${baseUrl?.startsWith("http") ? baseUrl : `https://${baseUrl}`}/release-og/${slug.join("")}.png`,
+	);
 	const { title, description } = page.data;
 
 	return {
