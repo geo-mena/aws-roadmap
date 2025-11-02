@@ -17,6 +17,7 @@ import { GenerateAppleJwt } from "@/components/generate-apple-jwt";
 import { GenerateSecret } from "@/components/generate-secret";
 import { AddToCursor } from "@/components/mdx/add-to-cursor";
 import DatabaseTable from "@/components/mdx/database-tables";
+import { Mermaid } from "@/components/mdx/mermaid";
 import { Callout } from "@/components/ui/callout";
 import {
 	CodeBlock,
@@ -135,6 +136,7 @@ export default async function Page({
 						ForkButton,
 						AddToCursor,
 						DatabaseTable,
+						Mermaid,
 						Accordion,
 						Accordions,
 						Endpoint,

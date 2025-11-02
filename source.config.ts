@@ -1,4 +1,4 @@
-import { remarkNpm } from "fumadocs-core/mdx-plugins";
+import { remarkMdxMermaid, remarkNpm } from "fumadocs-core/mdx-plugins";
 import {
 	defineCollections,
 	defineConfig,
@@ -52,6 +52,7 @@ export default defineConfig({
 				},
 			],
 			[remarkAutoTypeTable, { generator }],
+			remarkMdxMermaid,
 		],
 	},
 });
