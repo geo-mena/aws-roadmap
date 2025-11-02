@@ -1,0 +1,46 @@
+---
+title: Cost Considerations
+description: Understanding EC2 costs and optimization strategies.
+---
+
+## What Generates Costs in EC2
+
+| Component | Cost | Unit |
+|-----------|------|------|
+| **Running instance** | Varies by type | Per hour |
+| **EBS volumes** | ~$0.08-$0.10/GB | Per GB-month |
+| **Unassociated Elastic IP** | $0.005/hour | Per hour |
+| **Data transfer OUT** | $0.09/GB after 100GB | Per GB |
+| **EBS snapshots** | ~$0.05/GB | Per GB-month |
+
+## Cost Optimization
+
+### Free Tier (first 12 months)
+- 750 hours/month of `t2.micro` or `t3.micro` (Linux)
+- 30 GB of EBS General Purpose (gp2 or gp3)
+- 1 GB of snapshots
+
+### Optimization Strategies
+
+**1. Right-sizing**: Start with `t3.micro`, scale based on CloudWatch metrics
+
+**2. Stop vs Terminate**: For dev/test, stop when not in use (don't pay for compute, only EBS)
+
+**3. Spot Instances**: 70-90% discount for fault-tolerant workloads (not covered yet)
+
+**4. Reserved/Savings Plans**: Up to 72% discount for predictable workloads (not covered yet)
+
+## Cost Monitoring
+
+```bash
+# View costs by instance type
+aws ce get-cost-and-usage \
+  --time-period Start=2025-10-01,End=2025-10-10 \
+  --granularity DAILY \
+  --metrics UnblendedCost \
+  --group-by Type=DIMENSION,Key=INSTANCE_TYPE
+```
+
+<Callout type="info">
+Always monitor your costs regularly. Unexpected charges usually come from resources left running or unassociated Elastic IPs.
+</Callout>

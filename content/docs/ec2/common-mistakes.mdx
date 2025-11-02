@@ -1,0 +1,77 @@
+---
+title: Common Mistakes
+description: Common errors to avoid when working with EC2 and how to fix them.
+---
+
+## 1. SSH Timeout Even Though Security Group is Correct
+
+**Why it happens**: Your ISP may block outbound port 22 due to security policies.
+
+**How to diagnose**:
+```bash
+# Test 1: Can you reach port 80?
+curl http://[instance-ip]  # If it works, it's not AWS
+
+# Test 2: Verify SSH specifically
+nc -zv [instance-ip] 22    # If timeout, it's local network issue
+```
+
+**Solution**:
+- Use AWS Systems Manager Session Manager (doesn't require port 22)
+- Change SSH to alternative port (e.g., 2222, 443)
+- Contact your ISP or use VPN
+
+## 2. Forgetting to Adjust Keypair Permissions
+
+**Why it happens**: SSH rejects files with overly permissive settings for security.
+
+**Typical error**: `WARNING: UNPROTECTED PRIVATE KEY FILE!`
+
+**Solution**:
+```bash
+chmod 400 my-keypair.pem  # Always after creating keypair
+```
+
+## 3. Exhausting CPU Credits on T Instances Without Realizing It
+
+**Why it happens**: Sustained loads consume credits faster than accumulation.
+
+**Symptom**: Instance becomes slow after hours of load, but CloudWatch shows low CPU usage (because it's throttled to baseline).
+
+**Solution**:
+- Monitor `CPUCreditBalance` metric in CloudWatch
+- If consistently low, migrate to M family or enable Unlimited mode (with cost awareness)
+
+## 4. Unexpected Elastic IP Costs
+
+**Why it happens**: Allocated but not attached = $0.005/hour.
+
+**Solution**:
+```bash
+# List orphaned EIPs
+aws ec2 describe-addresses \
+  --query 'Addresses[?AssociationId==null]'
+
+# Release immediately if not used
+aws ec2 release-address --allocation-id eipalloc-xxxxx
+```
+
+## 5. Losing Data When Terminating Instance
+
+**Why it happens**: `DeleteOnTermination: true` on EBS volume (default).
+
+**Prevention**:
+- For critical data, always set `DeleteOnTermination: false`
+- Create snapshots before major changes
+- Use RDS/DynamoDB for databases instead of EBS
+
+## 6. Not Verifying Status Checks Before Diagnosing
+
+**Why it happens**: Assuming "running" = "functional".
+
+**Solution**:
+```bash
+# Always verify detailed status checks
+aws ec2 describe-instance-status --instance-ids i-xxxxx
+```
+Look for `InstanceStatus: ok` and `SystemStatus: ok` before investigating networking.

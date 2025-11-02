@@ -1,0 +1,46 @@
+---
+title: Best Practices
+description: Checklist of best practices for EC2 security, cost optimization, performance, and reliability.
+---
+
+## Security
+
+- [ ] **Never** expose port 22 to `0.0.0.0/0` - use specific IP or Session Manager
+- [ ] Use security groups with least privilege principle
+- [ ] Rotate keypairs periodically and store them securely
+- [ ] Enable encryption on EBS volumes (`Encrypted: true`)
+- [ ] Use IAM roles instead of hardcoding credentials in instances
+- [ ] Keep OS updated (`yum update -y` in user data)
+
+## Cost Optimization
+
+- [ ] Set `DeleteOnTermination: true` for ephemeral instances
+- [ ] Release Elastic IPs that aren't in use
+- [ ] Monitor CPU Credits on T instances - consider M family if constantly bursting
+- [ ] Use appropriate sizes - start small and scale based on metrics
+- [ ] Consider Reserved Instances or Savings Plans for predictable workloads
+- [ ] Terminate dev instances outside working hours
+
+## Performance
+
+- [ ] Choose instance type based on actual bottleneck (CPU vs RAM vs I/O)
+- [ ] Use gp3 instead of gp2 for better cost/performance
+- [ ] For I/O intensive workloads, consider Instance Store or io2 EBS
+- [ ] Launch instances in Availability Zone close to users
+- [ ] Enable detailed monitoring if you need metrics every 1 min
+
+## Reliability
+
+- [ ] Never use a single instance in production - design for multiple AZs
+- [ ] Implement proper health checks
+- [ ] Automate deployments with user data or config management
+- [ ] Create AMIs of configured instances for fast recovery
+- [ ] Configure automated snapshots of critical EBS volumes
+
+## Operational Excellence
+
+- [ ] Use consistent tags (`Name`, `Environment`, `Project`, `Owner`)
+- [ ] Document in user data what's installed and why
+- [ ] Use CloudWatch for centralized logs
+- [ ] Implement Infrastructure as Code (CloudFormation/Terraform)
+- [ ] Maintain inventory of instances and their purposes

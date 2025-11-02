@@ -1,0 +1,35 @@
+---
+title: Integration and Resources
+description: How EC2 integrates with other AWS services and additional learning resources.
+---
+
+## Integration with Other Services
+
+| Service | How it integrates | Typical use case |
+|---------|------------------|------------------|
+| **VPC** | EC2 lives inside VPC | Networking, subnets, security groups |
+| **EBS** | Storage volumes for EC2 | Root volumes, data persistence |
+| **IAM** | Instance profiles / roles | Permissions to access S3, DynamoDB, etc. |
+| **CloudWatch** | Metrics and logs from instances | Monitoring CPU, RAM, custom metrics |
+| **Auto Scaling** | Automatic instance management | Scale out/in based on demand |
+| **ELB** | Traffic distribution | Load balancing across multiple instances |
+| **S3** | Artifact storage | User data scripts, backups, static assets |
+| **RDS** | Database backend | EC2 app servers + RDS database |
+| **Route 53** | DNS routing | Map domains to instances or load balancers |
+| **Systems Manager** | Remote management | Session Manager (SSH alternative), patching |
+
+## Additional Resources
+
+### Official Documentation
+- [EC2 User Guide](https://docs.aws.amazon.com/ec2/)
+- [EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/)
+- [EBS Documentation](https://docs.aws.amazon.com/ebs/)
+- [T Instance CPU Credits](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-credits-baseline-concepts.html)
+
+### Whitepapers
+- [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/)
+- [Cost Optimization Pillar](https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html)
+
+### Tools
+- [EC2 Instance Comparison](https://instances.vantage.sh/)
+- [AWS Pricing Calculator](https://calculator.aws/)

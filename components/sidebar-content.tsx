@@ -1,23 +1,5 @@
 import { PageTree } from "fumadocs-core/server";
-import {
-	Binoculars,
-	Book,
-	CircleHelp,
-	Database,
-	Gauge,
-	Key,
-	KeyRound,
-	LucideAArrowDown,
-	LucideIcon,
-	Mail,
-	Mailbox,
-	Phone,
-	ScanFace,
-	ShieldCheck,
-	UserCircle,
-	UserSquare2,
-	Users2,
-} from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import { ReactNode, SVGProps } from "react";
 
 interface Content {
@@ -90,6 +72,52 @@ export const contents: Content[] = [
 			{
 				title: "Introduction",
 				href: "/docs/introduction",
+			},
+		],
+	},
+	{
+		title: "EC2",
+		Icon: () => (
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="1.4em"
+				height="1.4em"
+				viewBox="0 0 24 24"
+			>
+				<path
+					fill="currentColor"
+					d="M4 1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1"
+				/>
+			</svg>
+		),
+		list: [
+			{
+				title: "Overview",
+				href: "/docs/ec2/overview",
+			},
+			{
+				title: "AWS CLI Commands",
+				href: "/docs/ec2/commands-cli",
+			},
+			{
+				title: "Architecture and Flows",
+				href: "/docs/ec2/architecture-and-flows",
+			},
+			{
+				title: "Best Practices",
+				href: "/docs/ec2/best-practices",
+			},
+			{
+				title: "Common Mistakes",
+				href: "/docs/ec2/common-mistakes",
+			},
+			{
+				title: "Costs",
+				href: "/docs/ec2/costs",
+			},
+			{
+				title: "Integration and Resources",
+				href: "/docs/ec2/integration-and-resources",
 			},
 		],
 	},

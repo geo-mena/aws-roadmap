@@ -1,0 +1,78 @@
+---
+title: Architecture and Flows
+description: Understanding EC2 architecture, component relationships, and operational flows.
+---
+
+## EC2 Instance Components Diagram
+
+```mermaid
+graph TB
+    subgraph "AWS Cloud - Region: sa-east-1"
+        subgraph "VPC - 172.31.0.0/16"
+            subgraph "Public Subnet - AZ: sa-east-1a"
+                EC2[EC2 Instance<br/>t3.micro<br/>Private IP: 172.31.6.211]
+                EBS[EBS Volume<br/>gp3 - 8GB<br/>vol-xxxxx]
+                SG[Security Group<br/>Port 22: Your IP<br/>Port 80: 0.0.0.0/0]
+            end
+            IGW[Internet Gateway]
+        end
+
+        EC2 ---|attached| EBS
+        SG ---|protects| EC2
+        EC2 ---|routes through| IGW
+    end
+
+    Internet[Internet] ---|Public IP: 18.228.228.141| IGW
+    User[User] -->|HTTP:80| Internet
+    User -.->|SSH:22 BLOCKED by ISP| Internet
+
+    style EC2 fill:#FF9900
+    style EBS fill:#7AA116
+    style SG fill:#DD344C
+```
+
+## Instance Launch Flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant CLI as AWS CLI
+    participant EC2 as EC2 Service
+    participant EBS as EBS Service
+    participant OS as Operating System
+
+    User->>CLI: run-instances
+    CLI->>EC2: Launch request
+    EC2->>EBS: Create root volume
+    EBS-->>EC2: vol-xxxxx created
+    EC2->>EC2: Assign Private IP (VPC)
+    EC2->>EC2: Assign Public IP (if subnet configured)
+    EC2->>OS: Boot from AMI
+    OS->>OS: Cloud-init starts
+    OS->>OS: Execute user data script
+    Note over OS: yum update<br/>install nodejs<br/>start app
+    OS-->>EC2: Status checks
+    EC2-->>User: Instance running
+    User->>OS: SSH connection (port 22)
+    Note over User,OS: Connection may fail<br/>if ISP blocks port
+```
+
+## EBS Lifecycle
+
+```mermaid
+stateDiagram-v2
+    [*] --> Creating
+    Creating --> Available: Volume created
+    Available --> InUse: Attached to instance
+    InUse --> Available: Detached
+    InUse --> InUse: Instance running
+    Available --> Snapshot: Create backup
+    Snapshot --> Available: Restore
+    Available --> [*]: DeleteOnTermination=true
+    InUse --> [*]: Instance terminated + DeleteOnTermination=true
+    Available --> [*]: Manual delete
+```
+
+<Callout type="warn">
+By default, root volumes have `DeleteOnTermination=true`. Always check this setting for instances with important data.
+</Callout>
