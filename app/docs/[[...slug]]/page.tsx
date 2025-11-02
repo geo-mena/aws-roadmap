@@ -178,7 +178,9 @@ export async function generateMetadata({
 	const page = source.getPage(slug);
 	if (page == null) notFound();
 	const baseUrl = process.env.NEXT_PUBLIC_URL || process.env.VERCEL_URL;
-	const url = new URL(`${baseUrl}/api/og`);
+	const url = new URL(
+		`${baseUrl?.startsWith("http") ? baseUrl : `https://${baseUrl}`}/api/og`,
+	);
 	const { title, description } = page.data;
 	const pageSlug = page.file.path;
 	url.searchParams.set("type", "Documentation");
