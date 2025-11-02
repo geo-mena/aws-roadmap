@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { AsideLink } from "@/components/ui/aside-link";
 import { cn } from "@/lib/utils";
-import { contents, examples } from "./sidebar-content";
+import { contents } from "./sidebar-content";
 import { Badge } from "./ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "./ui/select";
 
@@ -27,12 +27,11 @@ export default function ArticleLayout() {
 	const [group, setGroup] = useState("docs");
 
 	useEffect(() => {
-		const grp = pathname.includes("examples") ? "examples" : "docs";
-		setGroup(grp);
+		setGroup("docs");
 		setCurrentOpen(getDefaultValue());
 	}, [pathname]);
 
-	const cts = group === "docs" ? contents : examples;
+	const cts = contents;
 
 	return (
 		<div className={cn("fixed start-0 top-0")}>
@@ -110,9 +109,6 @@ export default function ArticleLayout() {
 																		className="break-words text-nowrap w-[--fd-sidebar-width] [&>div>div]:hover:!bg-fd-muted"
 																		activeClassName="[&>div>div]:!bg-fd-muted"
 																	>
-																		<div className="min-w-4">
-																			<listItem.icon className="text-stone-950 dark:text-white" />
-																		</div>
 																		{listItem.title}
 																		{listItem.isNew && <NewBadge />}
 																	</AsideLink>
@@ -173,39 +169,7 @@ const tabs = [
 		),
 		title: "Docs",
 		description: "get started, concepts, and plugins",
-	},
-	{
-		value: "examples",
-		icon: (
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="1.4em"
-				height="1.4em"
-				viewBox="0 0 24 24"
-			>
-				<path
-					fill="currentColor"
-					d="M12 2c4.714 0 7.071 0 8.535 1.464c1.08 1.08 1.364 2.647 1.439 5.286L22 9.5H2.026v-.75c.075-2.64.358-4.205 1.438-5.286C4.93 2 7.286 2 12 2"
-					opacity=".5"
-				></path>
-				<path
-					fill="currentColor"
-					d="M13 6a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-3 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0M7 6a1 1 0 1 1-2 0a1 1 0 0 1 2 0"
-				></path>
-				<path
-					fill="currentColor"
-					d="M2 12c0 4.714 0 7.071 1.464 8.535c1.01 1.01 2.446 1.324 4.786 1.421L9 22V9.5H2.026l-.023.75Q2 11.066 2 12"
-					opacity=".7"
-				></path>
-				<path
-					fill="currentColor"
-					d="M22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22c-.819 0-2.316 0-3-.008V9.5h13l-.003.75Q22 11.066 22 12"
-				></path>
-			</svg>
-		),
-		title: "Examples",
-		description: "examples and guides",
-	},
+	}
 ];
 
 function SidebarTab({
