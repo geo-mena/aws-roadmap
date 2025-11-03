@@ -44,14 +44,14 @@ export default async function HomePage() {
 									href="https://roadmap.sh/aws"
 									className="font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 hidden dark:hover:text-blue-300 transition-colors md:block"
 								>
-									AWS Roadmap →
+									roadmap.sh →
 								</Link>
 							</span>
 							<Link
 								href="https://roadmap.sh/aws"
 								className="font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 text-xs dark:hover:text-blue-300 transition-colors md:hidden"
 							>
-								AWS Roadmap →
+								roadmap.sh →
 							</Link>
 						</div>
 					</div>
@@ -65,7 +65,6 @@ export default async function HomePage() {
 				id="hero"
 			>
 				<Hero />
-				<Features stars={stars} />
 				<hr className="h-px bg-border" />
 			</Section>
 		</main>

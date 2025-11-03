@@ -14,11 +14,11 @@ import "./global.css";
 
 export const metadata = createMetadata({
 	title: {
-		template: "%s | Better Auth",
-		default: "Better Auth",
+		template: "%s | AWS Roadmap",
+		default: "AWS Roadmap",
 	},
 	description:
-		"The most comprehensive authentication framework for TypeScript.",
+		"Step by step guide to learning AWS in 2025.",
 	metadataBase: baseUrl,
 });
 
