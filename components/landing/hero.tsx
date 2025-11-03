@@ -19,11 +19,11 @@ export default function Hero() {
 
 			{/* Content */}
 			<div className="px-4 py-8 md:w-10/12 mx-auto relative z-10">
-				<div className="mx-auto grid lg:max-w-8xl xl:max-w-full grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-2 lg:grid-cols-2 lg:px-8 lg:py-4 xl:gap-x-16 xl:px-0">
-					<div className="relative z-10 text-left lg:mt-0">
+				<div className="mx-auto grid lg:max-w-8xl xl:max-w-full grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-2 lg:px-8 lg:py-4 xl:gap-x-16 xl:px-0">
+					<div className="relative z-10 text-center lg:mt-0">
 						<div className="relative space-y-4">
 							<div className="space-y-2">
-								<div className="flex flex-col gap-2">
+								<div className="flex flex-col gap-2 items-center">
 									<div className="flex items-end gap-1 mt-2">
 										<div className="flex items-center gap-1">
 											<svg
@@ -49,7 +49,7 @@ export default function Hero() {
 								</p>
 							</div>
 
-							<div className="mt-4 flex w-fit flex-col gap-4 font-sans md:flex-row md:justify-center lg:justify-start items-center">
+							<div className="mt-4 flex w-fit flex-col gap-4 font-sans md:flex-row justify-center items-center mx-auto">
 								<Link
 									href="/docs"
 									className="hover:shadow-sm dark:border-stone-100 dark:hover:shadow-sm border-2 border-black bg-white px-4 py-1.5 text-sm uppercase text-black shadow-[1px_1px_rgba(0,0,0),2px_2px_rgba(0,0,0),3px_3px_rgba(0,0,0),4px_4px_rgba(0,0,0),5px_5px_0px_0px_rgba(0,0,0)] transition duration-200 md:px-8 dark:shadow-[1px_1px_rgba(255,255,255),2px_2px_rgba(255,255,255),3px_3px_rgba(255,255,255),4px_4px_rgba(255,255,255),5px_5px_0px_0px_rgba(255,255,255)]"
