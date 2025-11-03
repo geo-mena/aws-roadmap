@@ -110,7 +110,7 @@ export const Navbar = () => {
 							</NavLink>
 						))}
 						<NavLink
-							href="https://github.com/better-auth/better-auth"
+							href="https://github.com/geo-mena/aws-roadmap"
 							className="bg-muted/20"
 							external
 						>
